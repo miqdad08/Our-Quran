@@ -138,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                                   child: SvgPicture.asset(
                                     'assets/book.svg',
                                     fit: BoxFit.fitHeight,
-                                    color: AppColors.white,
+                                    // color: AppColors.white,
                                     height: 52.h,
                                     width: 44.w,
                                   ),
@@ -197,7 +197,7 @@ class _HomePageState extends State<HomePage> {
                                   child: SvgPicture.asset(
                                     'assets/search.svg',
                                     fit: BoxFit.fitHeight,
-                                    color: AppColors.primary,
+                                    // color: AppColors.primary,
                                     height: 52.h,
                                     width: 44.w,
                                   ),
@@ -205,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                                 Padding(
                                   padding: EdgeInsets.only(bottom: 24.sp),
                                   child: Text(
-                                    'Pencarian',
+                                    'Pencariaan',
                                     style: TextStyle(
                                       color: AppColors.primary,
                                       fontSize: 20.sp,
@@ -222,7 +222,8 @@ class _HomePageState extends State<HomePage> {
                                 width: 160.w,
                                 height: 160.h,
                                 child: SvgPicture.asset('assets/ornament.svg',
-                                    color: AppColors.primary),
+                                    // color: AppColors.primary,
+                                ),
                               ),
                             ),
                           ],
@@ -258,7 +259,7 @@ class _HomePageState extends State<HomePage> {
                                   child: SvgPicture.asset(
                                     'assets/brain.svg',
                                     fit: BoxFit.fitHeight,
-                                    color: AppColors.primary,
+                                    // color: AppColors.primary,
                                     height: 52.h,
                                     width: 44.w,
                                   ),
@@ -283,7 +284,8 @@ class _HomePageState extends State<HomePage> {
                                 width: 160.w,
                                 height: 160.h,
                                 child: SvgPicture.asset('assets/ornament.svg',
-                                    color: AppColors.primary),
+                                    // color: AppColors.primary,
+                                ),
                               ),
                             ),
                           ],
@@ -318,7 +320,7 @@ class _HomePageState extends State<HomePage> {
                                   child: SvgPicture.asset(
                                     'assets/dashboard.svg',
                                     fit: BoxFit.fitHeight,
-                                    color: AppColors.white,
+                                    // color: AppColors.white,
                                     height: 52.h,
                                     width: 44.w,
                                   ),
