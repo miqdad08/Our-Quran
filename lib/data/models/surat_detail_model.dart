@@ -11,10 +11,10 @@ class SuratDetailModel {
     this.arti,
     this.deskripsi,
     this.audio,
-    this.status,
+    // this.status,
     this.ayat,
     this.suratSelanjutnya,
-    this.suratSebelumnya,
+    // this.suratSebelumnya,
   });
 
   int? nomor;
@@ -25,10 +25,10 @@ class SuratDetailModel {
   String? arti;
   String? deskripsi;
   String? audio;
-  bool? status;
+  // bool? status;
   List<Ayat>? ayat;
   SuratSelanjutnya? suratSelanjutnya;
-  bool? suratSebelumnya;
+  // bool? suratSebelumnya;
 
   factory SuratDetailModel.fromRawJson(String str) => SuratDetailModel.fromJson(json.decode(str));
 
@@ -43,10 +43,10 @@ class SuratDetailModel {
     arti: json["arti"],
     deskripsi: json["deskripsi"],
     audio: json["audio"],
-    status: json["status"],
+    // status: json["status"],
     ayat: json["ayat"] == null ? [] : List<Ayat>.from(json["ayat"]!.map((x) => Ayat.fromJson(x))),
     suratSelanjutnya: json["surat_selanjutnya"] == null ? null : SuratSelanjutnya.fromJson(json["surat_selanjutnya"]),
-    suratSebelumnya: json["surat_sebelumnya"],
+    // suratSebelumnya: json["surat_sebelumnya"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -58,10 +58,10 @@ class SuratDetailModel {
     "arti": arti,
     "deskripsi": deskripsi,
     "audio": audio,
-    "status": status,
+    // "status": status,
     "ayat": ayat == null ? [] : List<dynamic>.from(ayat!.map((x) => x.toJson())),
     "surat_selanjutnya": suratSelanjutnya?.toJson(),
-    "surat_sebelumnya": suratSebelumnya,
+    // "surat_sebelumnya": suratSebelumnya,
   };
 }
 
