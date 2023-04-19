@@ -74,7 +74,7 @@ class _SuratPageState extends State<SuratPage> {
               itemCount: state.listSurat.length,
             );
           }
-          if (state is SurataError) {
+          if (state is SuratError) {
             return Center(
               child: Text(state.message),
             );

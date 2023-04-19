@@ -14,7 +14,7 @@ class SuratCubit extends Cubit<SuratState> {
     emit(SuratLoading());
     final result = await quranService.getAllSurat();
     result.fold(
-      (error) => emit(SurataError(message: error)),
+      (error) => emit(SuratError(message: error)),
       (data) => emit(SuratLoaded(listSurat: data)),
     );
   }
