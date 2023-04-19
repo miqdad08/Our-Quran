@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:myquran/bloc/surat/surat_cubit.dart';
+import 'package:myquran/cubit/surat/surat_cubit.dart';
 import 'package:myquran/ui/ayat_page.dart';
 import 'package:myquran/ui/const.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../bloc/ayat/ayat_cubit.dart';
+import '../cubit/ayat/ayat_cubit.dart';
 import '../data/models/surat_model.dart';
 import 'const.dart';
 
