@@ -1,8 +1,21 @@
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:myquran/data/services/quran_service.dart';
+import '../../data/models/surat_model.dart';
 
 part 'surat_state.dart';
 
 class SuratCubit extends Cubit<SuratState> {
-  SuratCubit() : super(SuratInitial());
+  SuratCubit(this.quranService) : super(SuratInitial());
+
+  final QuranService quranService;
+
+  void getAllSurat() async {
+    emit(SuratLoading());
+    final result = await quranService.getAllSurat();
+    result.fold(
+      (error) => emit(SurataError(message: error)),
+      (data) => emit(SuratLoaded(listSurat: data)),
+    );
+  }
 }
