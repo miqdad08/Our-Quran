@@ -26,11 +26,14 @@ class QuranService {
     }
   }
 
-  Future<Either<String, SuratDetailModel>> getDetailSurat(int nomorSurat) async {
+  Future<Either<String, SuratDetailModel>> getDetailSurat(
+      int nomorSurat) async {
     try {
-      final response = await client.get(Uri.parse('${ApiConst.baseUrl}/surat/$nomorSurat'));
+      final response =
+          await client.get(Uri.parse('${ApiConst.baseUrl}/surat/$nomorSurat'));
       return Right(SuratDetailModel.fromJson(jsonDecode(response.body)));
     } catch (e) {
+      print(e);
       return left(e.toString());
     }
   }
