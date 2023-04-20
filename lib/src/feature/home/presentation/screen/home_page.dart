@@ -5,6 +5,7 @@ import 'package:myquran/src/feature/all_surah/presentation/screen/surat_page.dar
 import 'package:myquran/src/feature/home/presentation/widget/app_bar_home.dart';
 
 import '../../../../const/app_color.dart';
+import '../widget/bottom_navigation_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,8 +19,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBarHomeWidget(),
-      bottomNavigationBar: _bottomNavigationBar(),
+      appBar: const AppBarHomeWidget(),
+      bottomNavigationBar: const BottomNavigationWidget(),
       body: DefaultTabController(
         length: 4,
         child: Padding(
@@ -171,32 +172,4 @@ class _HomePageState extends State<HomePage> {
       ],
     );
   }
-
-  BottomNavigationBar _bottomNavigationBar() => BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: AppColors.gray,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items: [
-          _bottomBarItem(icon: "assets/svgs/quran-icon.svg", label: "Quran"),
-          _bottomBarItem(icon: "assets/svgs/lamp-icon.svg", label: "Tips"),
-          _bottomBarItem(icon: "assets/svgs/pray-icon.svg", label: "Prayer"),
-          _bottomBarItem(icon: "assets/svgs/doa-icon.svg", label: "Doa"),
-          _bottomBarItem(
-              icon: "assets/svgs/bookmark-icon.svg", label: "Bookmark"),
-        ],
-      );
-
-  BottomNavigationBarItem _bottomBarItem(
-          {required String icon, required String label}) =>
-      BottomNavigationBarItem(
-          icon: SvgPicture.asset(
-            icon,
-            color: AppColors.text,
-          ),
-          activeIcon: SvgPicture.asset(
-            icon,
-            color: AppColors.primary,
-          ),
-          label: label);
 }
