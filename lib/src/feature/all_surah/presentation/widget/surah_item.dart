@@ -18,7 +18,7 @@ class SurahItem extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => AyatPage(
+            builder: (context) => SurahDetailPage(
               surat: surah,
             ),
           ),
