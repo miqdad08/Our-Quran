@@ -42,7 +42,7 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
           return Scaffold(
             backgroundColor: AppColors.background,
             appBar: AppBarDetailWidget(
-              surah: '${widget.surat.namaLatin}${widget.surat.nomor}',
+              surah: widget.surat.namaLatin,
             ),
             body: NestedScrollView(
               headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -85,60 +85,5 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
         );
       },
     );
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     title: Text(
-    //       '${widget.surat.namaLatin}${widget.surat.nomor}',
-    //     ),
-    //   ),
-    //   body: BlocBuilder<AyatBloc, AyatState>(
-    //     builder: (context, state) {
-    //       if (state is AyatLoading) {
-    //         return const Center(
-    //           child: CircularProgressIndicator(),
-    //         );
-    //       }
-    //       if (state is AyatLoaded) {
-    //         return ListView.builder(
-    //           itemCount: state.detail.ayat!.length,
-    //           itemBuilder: (context, index) {
-    //             final ayat = state.detail.ayat![index];
-    //             return AyatItem(detail: state.detail, index: index);
-    //             // return Card(
-    //             //   child: ListTile(
-    //             //     leading: CircleAvatar(
-    //             //       backgroundColor: AppColors.primary,
-    //             //       child: Text(
-    //             //         '${index + 1}',
-    //             //         style: const TextStyle(
-    //             //             // color: AppColors.white,
-    //             //             ),
-    //             //       ),
-    //             //     ),
-    //             //     title: Text(
-    //             //       '${ayat.ar}',
-    //             //       textAlign: TextAlign.right,
-    //             //       style: const TextStyle(
-    //             //           fontSize: 24, fontWeight: FontWeight.bold),
-    //             //     ),
-    //             //     subtitle: Text(
-    //             //       '${ayat.idn}',
-    //             //     ),
-    //             //   ),
-    //             // );
-    //           },
-    //         );
-    //       }
-    //       if (state is AyatError) {
-    //         return Center(
-    //           child: Text(state.message),
-    //         );
-    //       }
-    //       return const Center(
-    //         child: Text('No Data'),
-    //       );
-    //     },
-    //   ),
-    // );
   }
 }
