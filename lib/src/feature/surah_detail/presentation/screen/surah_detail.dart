@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:myquran/bloc/ayat/ayat_bloc.dart';
 
-import '../data/models/surat_model.dart';
-import 'const.dart';
+import '../../../../const/app_color.dart';
+import '../../../all_surah/domain/model/surat_model.dart';
+import '../bloc/ayat_bloc.dart';
 
 class AyatPage extends StatefulWidget {
   final SuratModel surat;
@@ -39,32 +39,33 @@ class _AyatPageState extends State<AyatPage> {
           }
           if (state is AyatLoaded) {
             return ListView.builder(
-                itemCount: state.detail.ayat!.length,
-                itemBuilder: (context, index) {
-                  final ayat = state.detail.ayat![index];
-                  return Card(
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: AppColors.primary,
-                        child: Text(
-                          '${index+1}',
-                          style: const TextStyle(
-                            // color: AppColors.white,
-                          ),
-                        ),
-                      ),
-                      title: Text(
-                        '${ayat.ar}',
-                        textAlign: TextAlign.right,
+              itemCount: state.detail.ayat!.length,
+              itemBuilder: (context, index) {
+                final ayat = state.detail.ayat![index];
+                return Card(
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: AppColors.primary,
+                      child: Text(
+                        '${index + 1}',
                         style: const TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text(
-                        '${ayat.idn}',
+                            // color: AppColors.white,
+                            ),
                       ),
                     ),
-                  );
-                });
+                    title: Text(
+                      '${ayat.ar}',
+                      textAlign: TextAlign.right,
+                      style: const TextStyle(
+                          fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                      '${ayat.idn}',
+                    ),
+                  ),
+                );
+              },
+            );
           }
           if (state is AyatError) {
             return Center(

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myquran/cubit/ayat/ayat_cubit.dart';
-import 'package:myquran/cubit/surat/surat_cubit.dart';
-import 'package:myquran/data/services/quran_service.dart';
+import 'package:myquran/src/feature/all_surah/data/surah_service.dart';
 import 'package:http/http.dart' as http;
-import 'ui/home_page.dart';
+import 'package:myquran/src/feature/home/presentation/screen/home_page.dart';
+import 'package:myquran/src/feature/all_surah/presentation/cubit/surat_cubit.dart';
+import 'package:myquran/src/feature/surah_detail/data/surah_detail_service.dart';
+import 'package:myquran/src/feature/surah_detail/presentation/bloc/ayat_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,14 +27,14 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(
               create: (context) => SuratCubit(
-                QuranService(
+                SurahService(
                   client: http.Client(),
                 ),
               ),
             ),
             BlocProvider(
-              create: (context) => AyatCubit(
-                QuranService(
+              create: (context) => AyatBloc(
+                SurahDetailService(
                   client: http.Client(),
                 ),
               ),

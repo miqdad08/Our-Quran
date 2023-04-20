@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myquran/ui/surat_page.dart';
-import 'const.dart';
+import 'package:myquran/src/feature/all_surah/presentation/screen/surat_page.dart';
+import 'package:myquran/src/feature/home/presentation/widget/app_bar_home.dart';
+
+import '../../../../const/app_color.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: _appBar(),
+      appBar: AppBarHomeWidget(),
       bottomNavigationBar: _bottomNavigationBar(),
       body: DefaultTabController(
         length: 4,
@@ -44,7 +45,7 @@ class _HomePageState extends State<HomePage> {
                     )
                   ],
               body: const TabBarView(children: [
-                Text('data'),
+                SuratPage(),
                 Text('data'),
                 Text('data'),
                 Text('data')
@@ -90,7 +91,7 @@ class _HomePageState extends State<HomePage> {
           height: 4,
         ),
         Text(
-          'Arif Iskandar',
+          'Ahmad Miqdad',
           style: GoogleFonts.poppins(
               fontSize: 24, fontWeight: FontWeight.w600, color: Colors.white),
         ),
@@ -170,29 +171,6 @@ class _HomePageState extends State<HomePage> {
       ],
     );
   }
-
-  AppBar _appBar() => AppBar(
-        backgroundColor: AppColors.background,
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        title: Row(children: [
-          IconButton(
-              onPressed: (() => {}),
-              icon: SvgPicture.asset('assets/svgs/menu-icon.svg')),
-          const SizedBox(
-            width: 24,
-          ),
-          Text(
-            'Quran App',
-            style:
-                GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          const Spacer(),
-          IconButton(
-              onPressed: (() => {}),
-              icon: SvgPicture.asset('assets/svgs/search-icon.svg')),
-        ]),
-      );
 
   BottomNavigationBar _bottomNavigationBar() => BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
