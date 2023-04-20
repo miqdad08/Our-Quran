@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:myquran/ui/surat_page.dart';
 import 'const.dart';
 
@@ -14,367 +15,210 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Ahlul Quran',
-          style: TextStyle(
-            color: AppColors.primary,
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
       backgroundColor: AppColors.background,
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 24.sp,
-          vertical: 16.sp,
-        ),
-        child: ListView(
-          children: [
-            SizedBox(
-              height: 156.h,
-              width: size.width - 24.w - 24.w,
-              child: Stack(
-                children: [
-                  Positioned(
-                    top: 16.sp,
-                    child: Container(
-                      height: 140.h,
-                      width: size.width - 24.w - 24.w,
-                      decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(18.r),
-                        image: const DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage('assets/motivasi.png'),
-                        ),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(24.sp),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.menu_book,
-                                  color: AppColors.white,
-                                  size: 20.sp,
-                                ),
-                                SizedBox(
-                                  width: 8.w,
-                                ),
-                                Text(
-                                  'Motivasi',
-                                  style: TextStyle(
-                                    color: AppColors.white,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 8.h,
-                            ),
-                            Text(
-                              'Sebaik - baik manusia diantara kamu adalah yang mempelajari Al-Quran dan mengajarkannya (HR Bukhori)',
-                              style: TextStyle(
-                                color: AppColors.white,
-                                fontSize: 12.sp,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+      appBar: _appBar(),
+      bottomNavigationBar: _bottomNavigationBar(),
+      body: DefaultTabController(
+        length: 4,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: NestedScrollView(
+              headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                    SliverToBoxAdapter(
+                      child: _greeting(),
                     ),
-                  ),
-                  Positioned(
-                    right: 24.sp,
-                    child: SizedBox(
-                      width: 40.w,
-                      height: 32.h,
-                      child: SvgPicture.asset('assets/petik.svg'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 28.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return const SuratPage();
-                            },
-                          ),
-                        );
-                      },
-                      child: Container(
-                        width: (size.width - 24.sp - 24.sp - 20.sp) / 2,
-                        height: 186.h,
-                        decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius: BorderRadius.circular(24.r),
-                          border: Border.all(
-                            color: AppColors.primary,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                            left: 16.sp,
-                          ),
-                          child: Stack(
-                            children: [
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 24.sp),
-                                    child: SvgPicture.asset(
-                                      'assets/book.svg',
-                                      fit: BoxFit.fitHeight,
-                                      // color: AppColors.white,
-                                      height: 52.h,
-                                      width: 44.w,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(bottom: 24.sp),
-                                    child: Text(
-                                      'Al Quran',
-                                      style: TextStyle(
-                                        color: AppColors.white,
-                                        fontSize: 20.sp,
-                                        fontWeight: FontWeight.w800,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              Positioned(
-                                top: -4.sp,
-                                left: 76.sp,
-                                child: SizedBox(
-                                  width: 160.w,
-                                  height: 160.h,
-                                  child:
-                                      SvgPicture.asset('assets/ornament.svg'),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                    SliverAppBar(
+                      pinned: true,
+                      elevation: 0,
+                      backgroundColor: AppColors.background,
+                      automaticallyImplyLeading: false,
+                      shape: Border(
+                          bottom: BorderSide(
+                              width: 3,
+                              color: const Color(0xFFAAAAAA).withOpacity(.1))),
+                      bottom: PreferredSize(
+                        preferredSize: const Size.fromHeight(0),
+                        child: _tab(),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Container(
-                      width: (size.width - 24.sp - 24.sp - 20.sp) / 2,
-                      height: 155.h,
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(24.r),
-                        border: Border.all(
-                          color: AppColors.primary.withOpacity(0.3),
-                        ),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          left: 16.sp,
-                        ),
-                        child: Stack(
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(top: 24.sp),
-                                  child: SvgPicture.asset(
-                                    'assets/search.svg',
-                                    fit: BoxFit.fitHeight,
-                                    // color: AppColors.primary,
-                                    height: 52.h,
-                                    width: 44.w,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(bottom: 24.sp),
-                                  child: Text(
-                                    'Pencariaan',
-                                    style: TextStyle(
-                                      color: AppColors.primary,
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.w800,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            Positioned(
-                              top: -4.sp,
-                              left: 60.sp,
-                              child: SizedBox(
-                                width: 160.w,
-                                height: 160.h,
-                                child: SvgPicture.asset(
-                                  'assets/ornament.svg',
-                                  // color: AppColors.primary,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    )
                   ],
-                ),
-                Column(
-                  children: [
-                    Container(
-                      width: (size.width - 24.sp - 24.sp - 20.sp) / 2,
-                      height: 155.h,
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(24.r),
-                        border: Border.all(
-                          color: AppColors.primary.withOpacity(0.3),
-                        ),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          left: 16.sp,
-                        ),
-                        child: Stack(
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(top: 24.sp),
-                                  child: SvgPicture.asset(
-                                    'assets/brain.svg',
-                                    fit: BoxFit.fitHeight,
-                                    // color: AppColors.primary,
-                                    height: 52.h,
-                                    width: 44.w,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(bottom: 24.sp),
-                                  child: Text(
-                                    'Hafalan',
-                                    style: TextStyle(
-                                      color: AppColors.primary,
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.w800,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            Positioned(
-                              top: -4.sp,
-                              left: 60.sp,
-                              child: SizedBox(
-                                width: 160.w,
-                                height: 160.h,
-                                child: SvgPicture.asset(
-                                  'assets/ornament.svg',
-                                  // color: AppColors.primary,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Container(
-                      width: (size.width - 24.sp - 24.sp - 20.sp) / 2,
-                      height: 186.h,
-                      decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(24.r),
-                        border: Border.all(
-                          color: AppColors.primary,
-                        ),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          left: 16.sp,
-                        ),
-                        child: Stack(
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(top: 24.sp),
-                                  child: SvgPicture.asset(
-                                    'assets/dashboard.svg',
-                                    fit: BoxFit.fitHeight,
-                                    // color: AppColors.white,
-                                    height: 52.h,
-                                    width: 44.w,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(bottom: 24.sp),
-                                  child: Text(
-                                    'Dashboard',
-                                    style: TextStyle(
-                                      color: AppColors.white,
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.w800,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            Positioned(
-                              top: -4.sp,
-                              left: 76.sp,
-                              child: SizedBox(
-                                width: 160.w,
-                                height: 160.h,
-                                child: SvgPicture.asset('assets/ornament.svg'),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
+              body: const TabBarView(children: [
+                Text('data'),
+                Text('data'),
+                Text('data'),
+                Text('data')
+              ])),
         ),
       ),
     );
   }
+
+  TabBar _tab() {
+    return TabBar(
+        unselectedLabelColor: AppColors.text,
+        labelColor: Colors.white,
+        indicatorColor: AppColors.primary,
+        indicatorWeight: 3,
+        tabs: [
+          _tabItem(label: "Surah"),
+          _tabItem(label: "Para"),
+          _tabItem(label: "Page"),
+          _tabItem(label: "Hijb"),
+        ]);
+  }
+
+  Tab _tabItem({required String label}) {
+    return Tab(
+      child: Text(
+        label,
+        style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w600),
+      ),
+    );
+  }
+
+  Column _greeting() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Assalamualaikum',
+          style: GoogleFonts.poppins(
+              fontSize: 18, fontWeight: FontWeight.w500, color: AppColors.text),
+        ),
+        const SizedBox(
+          height: 4,
+        ),
+        Text(
+          'Arif Iskandar',
+          style: GoogleFonts.poppins(
+              fontSize: 24, fontWeight: FontWeight.w600, color: Colors.white),
+        ),
+        const SizedBox(
+          height: 24,
+        ),
+        _lastRead()
+      ],
+    );
+  }
+
+  Stack _lastRead() {
+    return Stack(
+      children: [
+        Container(
+          height: 131,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              gradient: const LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  stops: [
+                    0,
+                    .6,
+                    1
+                  ],
+                  colors: [
+                    Color(0xFFDF98FA),
+                    Color(0xFFB070FD),
+                    Color(0xFF9055FF)
+                  ])),
+        ),
+        Positioned(
+            bottom: 0,
+            right: 0,
+            child: SvgPicture.asset('assets/svgs/quran.svg')),
+        Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  SvgPicture.asset('assets/svgs/book.svg'),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    'Last Read',
+                    style: GoogleFonts.poppins(
+                        color: Colors.white, fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Al-Fatihah',
+                style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18),
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              Text(
+                'Ayat No: 1',
+                style: GoogleFonts.poppins(
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+
+  AppBar _appBar() => AppBar(
+        backgroundColor: AppColors.background,
+        automaticallyImplyLeading: false,
+        elevation: 0,
+        title: Row(children: [
+          IconButton(
+              onPressed: (() => {}),
+              icon: SvgPicture.asset('assets/svgs/menu-icon.svg')),
+          const SizedBox(
+            width: 24,
+          ),
+          Text(
+            'Quran App',
+            style:
+                GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          const Spacer(),
+          IconButton(
+              onPressed: (() => {}),
+              icon: SvgPicture.asset('assets/svgs/search-icon.svg')),
+        ]),
+      );
+
+  BottomNavigationBar _bottomNavigationBar() => BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: AppColors.gray,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: [
+          _bottomBarItem(icon: "assets/svgs/quran-icon.svg", label: "Quran"),
+          _bottomBarItem(icon: "assets/svgs/lamp-icon.svg", label: "Tips"),
+          _bottomBarItem(icon: "assets/svgs/pray-icon.svg", label: "Prayer"),
+          _bottomBarItem(icon: "assets/svgs/doa-icon.svg", label: "Doa"),
+          _bottomBarItem(
+              icon: "assets/svgs/bookmark-icon.svg", label: "Bookmark"),
+        ],
+      );
+
+  BottomNavigationBarItem _bottomBarItem(
+          {required String icon, required String label}) =>
+      BottomNavigationBarItem(
+          icon: SvgPicture.asset(
+            icon,
+            color: AppColors.text,
+          ),
+          activeIcon: SvgPicture.asset(
+            icon,
+            color: AppColors.primary,
+          ),
+          label: label);
 }
