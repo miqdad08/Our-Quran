@@ -25,7 +25,7 @@ class AppBarHomeWidget extends StatelessWidget implements PreferredSizeWidget {
           width: 24,
         ),
         Text(
-          'Quran App',
+          'Our Quran',
           style: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         const Spacer(),
