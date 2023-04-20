@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:myquran/bloc/ayat/ayat_bloc.dart';
 
-import '../cubit/ayat/ayat_cubit.dart';
 import '../data/models/surat_model.dart';
 import 'const.dart';
 
@@ -17,7 +17,8 @@ class AyatPage extends StatefulWidget {
 class _AyatPageState extends State<AyatPage> {
   @override
   void initState() {
-    context.read<AyatCubit>().getDetailSurat(widget.surat.nomor);
+    // context.read<AyatCubit>().getDetailSurat(widget.surat.nomor);
+    context.read<AyatBloc>().add(GetAyatEvent(noSurat: widget.surat.nomor));
     super.initState();
   }
 
@@ -29,7 +30,7 @@ class _AyatPageState extends State<AyatPage> {
           '${widget.surat.namaLatin}${widget.surat.nomor}',
         ),
       ),
-      body: BlocBuilder<AyatCubit, AyatState>(
+      body: BlocBuilder<AyatBloc, AyatState>(
         builder: (context, state) {
           if (state is AyatLoading) {
             return const Center(
@@ -46,9 +47,9 @@ class _AyatPageState extends State<AyatPage> {
                       leading: CircleAvatar(
                         backgroundColor: AppColors.primary,
                         child: Text(
-                          '${ayat.id}',
+                          '${index+1}',
                           style: const TextStyle(
-                            color: AppColors.white,
+                            // color: AppColors.white,
                           ),
                         ),
                       ),
