@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myquran/src/feature/surah_detail/presentation/widget/search_ayat_box.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../../../const/app_color.dart';
 
-class AppBarDetailWidget extends StatelessWidget implements PreferredSizeWidget {
+class AppBarDetailWidget extends StatelessWidget
+    implements PreferredSizeWidget {
   final String surah;
+  final ItemScrollController itemScrollController;
+  final TextEditingController controller;
 
-  const AppBarDetailWidget({Key? key, required this.surah}) : super(key: key);
+  const AppBarDetailWidget(
+      {Key? key,
+      required this.surah,
+      required this.controller,
+      required this.itemScrollController})
+      : super(key: key);
 
   @override
   // TODO: implement preferredSize
@@ -32,7 +42,20 @@ class AppBarDetailWidget extends StatelessWidget implements PreferredSizeWidget 
         ),
         const Spacer(),
         IconButton(
-            onPressed: (() => {}),
+            onPressed: (() {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return SearchAyatBox(
+                    controller: controller,
+                    onCancel: () {
+                      Navigator.pop(context);
+                    },
+                    itemScrollController: itemScrollController,
+                  );
+                },
+              );
+            }),
             icon: SvgPicture.asset('assets/svgs/search-icon.svg')),
       ]),
     );

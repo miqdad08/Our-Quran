@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myquran/src/feature/surah_detail/presentation/widget/appbar_detail_widget.dart';
 import 'package:myquran/src/feature/surah_detail/presentation/widget/ayat_item.dart';
 import 'package:myquran/src/feature/surah_detail/presentation/widget/detail_banner_widget.dart';
-
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../../../../const/app_color.dart';
 import '../../../all_surah/domain/model/surat_model.dart';
 import '../bloc/ayat_bloc.dart';
@@ -25,65 +25,78 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
     super.initState();
   }
 
+  final ItemScrollController itemScrollController = ItemScrollController();
+  final ItemPositionsListener itemPositionsListener = ItemPositionsListener.create();
+  final TextEditingController searchAyatController = TextEditingController();
+
+  @override
+  void dispose() {
+    searchAyatController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AyatBloc, AyatState>(
-      builder: (context, state) {
-        if (state is AyatLoading) {
-          return const Scaffold(
-            backgroundColor: AppColors.background,
-            body: Center(
-              child: CircularProgressIndicator(),
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      appBar: AppBarDetailWidget(
+        surah: widget.surat.namaLatin, controller: searchAyatController, itemScrollController: itemScrollController,
+      ),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          SliverToBoxAdapter(
+            child: DetailBannerWidget(
+              ayatSurat: widget.surat,
             ),
-          );
-        }
-        if (state is AyatLoaded) {
-          var ayatSurat = state.detail;
-          return Scaffold(
-            backgroundColor: AppColors.background,
-            appBar: AppBarDetailWidget(
-              surah: widget.surat.namaLatin,
-            ),
-            body: NestedScrollView(
-              headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                SliverToBoxAdapter(
-                  child: DetailBannerWidget(
-                    ayatSurat: ayatSurat,
+          )
+        ],
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: BlocBuilder<AyatBloc, AyatState>(
+            builder: (context, state) {
+              if (state is AyatLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (state is AyatError) {
+                return Scaffold(
+                  body: Center(
+                    child: Text(state.message),
                   ),
-                )
-              ],
-              body: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: ListView.separated(
-                  itemBuilder: (context, index) {
-                    return AyatItem(
-                      detail: ayatSurat,
-                      index: index,
-                    );
-                  },
-                  // _ayatItem(
-                  //     ayat: surat.ayat!.elementAt(index + (noSurat == 1 ? 1 : 0))),
-                  itemCount:
-                      ayatSurat.jumlahAyat! + (ayatSurat.nomor == 1 ? -1 : 0),
-                  separatorBuilder: (context, index) => Container(),
-                ),
-              ),
-            ),
-          );
-        }
-        if (state is AyatError) {
-          return Scaffold(
-            body: Center(
-              child: Text(state.message),
-            ),
-          );
-        }
-        return const Scaffold(
-          body: Center(
-            child: Text('No Data'),
+                );
+              }
+              if (state is AyatLoaded) {
+                var ayatSurat = state.detail;
+                return ListView(
+                  children: [
+                    Expanded(
+                      child: ScrollablePositionedList.builder(
+                        shrinkWrap: true,
+                        itemCount: ayatSurat.jumlahAyat! + (ayatSurat.nomor == 1 ? -1 : 0),
+                        itemScrollController: itemScrollController,
+                        itemPositionsListener: itemPositionsListener,
+                        itemBuilder: (context, index) {
+                          return AyatItem(
+                            detail: ayatSurat,
+                            index: index,
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              }
+              return const Center(
+                child: Text('No Data Exist'),
+              );
+            },
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
+
+// _ayatItem(
+//     ayat: surat.ayat!.elementAt(index + (noSurat == 1 ? 1 : 0))),

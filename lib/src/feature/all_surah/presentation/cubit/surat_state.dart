@@ -14,7 +14,7 @@ class SuratLoading extends SuratState {}
 class SuratLoaded extends SuratState {
   final List<SuratModel> listSurat;
 
-  SuratLoaded({required this.listSurat});
+  const SuratLoaded({required this.listSurat});
 
   @override
   // TODO: implement props
@@ -24,7 +24,7 @@ class SuratLoaded extends SuratState {
 class SuratError extends SuratState{
   final String message;
 
-  SuratError({required this.message});
+  const SuratError({required this.message});
 
   @override
   // TODO: implement props

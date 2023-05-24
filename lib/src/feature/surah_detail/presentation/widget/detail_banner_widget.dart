@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myquran/src/feature/surah_detail/domain/model/surat_detail_model.dart';
+import 'package:myquran/src/feature/all_surah/domain/model/surat_model.dart';
 
 class DetailBannerWidget extends StatelessWidget {
-  final SuratDetailModel ayatSurat;
+  final SuratModel ayatSurat;
 
   const DetailBannerWidget({Key? key, required this.ayatSurat})
       : super(key: key);
@@ -52,7 +52,7 @@ class DetailBannerWidget extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  '${ayatSurat.namaLatin}',
+                  ayatSurat.namaLatin,
                   style: GoogleFonts.poppins(
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
@@ -62,7 +62,7 @@ class DetailBannerWidget extends StatelessWidget {
                   height: 4,
                 ),
                 Text(
-                  "${ayatSurat.arti}",
+                  ayatSurat.arti,
                   style: GoogleFonts.poppins(
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
@@ -77,7 +77,7 @@ class DetailBannerWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '${ayatSurat.tempatTurun}',
+                      ayatSurat.tempatTurun.name,
                       style: GoogleFonts.poppins(
                         color: Colors.white,
                         fontWeight: FontWeight.w500,

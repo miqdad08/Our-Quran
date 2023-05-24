@@ -21,4 +21,6 @@ class SurahDetailService {
       return left(e.toString());
     }
   }
+
+
 }
