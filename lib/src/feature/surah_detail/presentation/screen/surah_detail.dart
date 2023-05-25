@@ -9,7 +9,9 @@ import '../../../all_surah/domain/model/surat_model.dart';
 import '../bloc/ayat_bloc.dart';
 
 class SurahDetailPage extends StatefulWidget {
+  static const String routeName = '/surah-detail-page';
   final SuratModel surat;
+
 
   const SurahDetailPage({Key? key, required this.surat}) : super(key: key);
 

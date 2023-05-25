@@ -16,12 +16,9 @@ class SurahItem extends StatelessWidget {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => SurahDetailPage(
-              surat: surah,
-            ),
-          ),
+        Navigator.of(context).pushNamed(
+          SurahDetailPage.routeName,
+          arguments: surah,
         );
       },
       child: Padding(

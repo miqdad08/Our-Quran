@@ -5,7 +5,6 @@ import 'package:myquran/src/feature/all_surah/presentation/screen/surat_page.dar
 import 'package:myquran/src/feature/home/presentation/widget/app_bar_home.dart';
 
 import '../../../../const/app_color.dart';
-import '../widget/bottom_navigation_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -22,7 +21,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: const AppBarHomeWidget(),
-      bottomNavigationBar: const BottomNavigationWidget(),
+      // bottomNavigationBar: const BottomNavigationWidget(),
       body: DefaultTabController(
         length: 4,
         child: Padding(

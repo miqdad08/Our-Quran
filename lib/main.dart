@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:myquran/src/app_screen.dart';
 import 'package:myquran/src/feature/all_surah/data/surah_service.dart';
 import 'package:http/http.dart' as http;
-import 'package:myquran/src/feature/home/presentation/screen/home_page.dart';
 import 'package:myquran/src/feature/all_surah/presentation/cubit/surat_cubit.dart';
 import 'package:myquran/src/feature/surah_detail/data/ayat_cubit/ayat_cubit.dart';
 import 'package:myquran/src/feature/surah_detail/data/surah_detail_service.dart';
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(360, 690),
+      // designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
@@ -44,16 +43,12 @@ class MyApp extends StatelessWidget {
               create: (context) => AyatCubit(),
             ),
           ],
-          child: MaterialApp(
-            title: 'My Quran',
-            theme: ThemeData(
-              primarySwatch: Colors.brown,
-              fontFamily: GoogleFonts.poppins().fontFamily,
-            ),
-            home: const HomePage(),
-          ),
+          child: const AppScreen(),
         );
       },
+
     );
   }
 }
+
+
