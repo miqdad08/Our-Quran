@@ -61,11 +61,11 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
       BottomNavigationBarItem(
         icon: SvgPicture.asset(
           icon,
-          color: AppColors.primary,
+          color: AppColors.text,
         ),
         activeIcon: SvgPicture.asset(
           icon,
-          color: AppColors.gray,
+          color: AppColors.primary,
         ),
         label: label,
       );

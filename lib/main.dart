@@ -5,6 +5,7 @@ import 'package:myquran/src/app_screen.dart';
 import 'package:myquran/src/feature/all_surah/data/surah_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:myquran/src/feature/all_surah/presentation/cubit/surat_cubit.dart';
+import 'package:myquran/src/feature/saved_ayat/presentation/saved_ayat_bloc/saved_ayat_bloc.dart';
 import 'package:myquran/src/feature/surah_detail/data/ayat_cubit/ayat_cubit.dart';
 import 'package:myquran/src/feature/surah_detail/data/surah_detail_service.dart';
 import 'package:myquran/src/feature/surah_detail/presentation/bloc/ayat_bloc.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
             BlocProvider(
-              create: (context) => AyatCubit(),
+              create: (context) => SavedAyatBloc(),
             ),
           ],
           child: const AppScreen(),

@@ -13,7 +13,7 @@ class SavedAyatInitial extends SavedAyatState {}
 class SavedAyatLoading extends SavedAyatState {}
 
 class SavedAyatLoaded extends SavedAyatState {
-  final List<SuratDetailModel> listSavedAyat;
+  final List<Ayat> listSavedAyat;
   final bool isSaved;
 
   const SavedAyatLoaded({required this.isSaved,

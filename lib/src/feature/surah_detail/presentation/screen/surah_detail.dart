@@ -6,12 +6,12 @@ import 'package:myquran/src/feature/surah_detail/presentation/widget/detail_bann
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../../../../const/app_color.dart';
 import '../../../all_surah/domain/model/surat_model.dart';
+import '../../../saved_ayat/presentation/saved_ayat_bloc/saved_ayat_bloc.dart';
 import '../bloc/ayat_bloc.dart';
 
 class SurahDetailPage extends StatefulWidget {
   static const String routeName = '/surah-detail-page';
   final SuratModel surat;
-
 
   const SurahDetailPage({Key? key, required this.surat}) : super(key: key);
 
@@ -28,7 +28,8 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
   }
 
   final ItemScrollController itemScrollController = ItemScrollController();
-  final ItemPositionsListener itemPositionsListener = ItemPositionsListener.create();
+  final ItemPositionsListener itemPositionsListener =
+      ItemPositionsListener.create();
   final TextEditingController searchAyatController = TextEditingController();
 
   @override
@@ -42,7 +43,9 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBarDetailWidget(
-        surah: widget.surat.namaLatin, controller: searchAyatController, itemScrollController: itemScrollController,
+        surah: widget.surat.namaLatin,
+        controller: searchAyatController,
+        itemScrollController: itemScrollController,
       ),
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -62,9 +65,13 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
                 );
               }
               if (state is AyatError) {
-                return Scaffold(
-                  body: Center(
-                    child: Text(state.message),
+                return Center(
+                  child: Text(
+                    state.message,
+                    style: const TextStyle(
+                      color: AppColors.text,
+                      fontSize: 16,
+                    ),
                   ),
                 );
               }
@@ -72,19 +79,28 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
                 var ayatSurat = state.detail;
                 return ListView(
                   children: [
-                    Expanded(
-                      child: ScrollablePositionedList.builder(
-                        shrinkWrap: true,
-                        itemCount: ayatSurat.jumlahAyat! + (ayatSurat.nomor == 1 ? -1 : 0),
-                        itemScrollController: itemScrollController,
-                        itemPositionsListener: itemPositionsListener,
-                        itemBuilder: (context, index) {
-                          return AyatItem(
-                            detail: ayatSurat,
-                            index: index,
-                          );
-                        },
-                      ),
+                    ScrollablePositionedList.builder(
+                      shrinkWrap: true,
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: ayatSurat.jumlahAyat! +
+                          (ayatSurat.nomor == 1 ? -1 : 0),
+                      itemScrollController: itemScrollController,
+                      itemPositionsListener: itemPositionsListener,
+                      itemBuilder: (context, index) {
+                        return AyatItem(
+                          ayat: ayatSurat.ayat![index],
+                          // id: index,
+                          ontap: () {
+                            context.read<SavedAyatBloc>().add(
+                              AddSavedAyatEvent(
+                                ayat: ayatSurat.ayat![index],
+                                isSaved: true,
+                              ),
+                            );
+                          },
+                          isSaved: false,
+                        );
+                      },
                     ),
                   ],
                 );
@@ -99,6 +115,3 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
     );
   }
 }
-
-// _ayatItem(
-//     ayat: surat.ayat!.elementAt(index + (noSurat == 1 ? 1 : 0))),

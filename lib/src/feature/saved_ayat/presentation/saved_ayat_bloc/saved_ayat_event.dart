@@ -11,12 +11,18 @@ class OnSavedAyatEvent extends SavedAyatEvent {}
 
 class AddSavedAyatEvent extends SavedAyatEvent {
   // final int idSurah;
-  final SuratDetailModel surahDetailModel;
+  final Ayat ayat;
   final bool isSaved;
 
   const AddSavedAyatEvent({
-    required this.surahDetailModel,
+    required this.ayat,
     required this.isSaved,
     // required this.idSurah,
   });
+}
+
+class RemoveSavedAyatEvent extends SavedAyatEvent{
+  final Ayat ayat;
+
+  const RemoveSavedAyatEvent({required this.ayat});
 }

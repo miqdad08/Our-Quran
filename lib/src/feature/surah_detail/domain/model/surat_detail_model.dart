@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'ayat.dart';
+
 class SuratDetailModel {
   SuratDetailModel({
     this.nomor,
@@ -12,7 +14,7 @@ class SuratDetailModel {
     this.audio,
     // this.status,
     this.ayat,
-    this.suratSelanjutnya,
+    // this.suratSelanjutnya,
     // this.suratSebelumnya,
   });
 
@@ -27,7 +29,7 @@ class SuratDetailModel {
 
   // bool? status;
   List<Ayat>? ayat;
-  SuratSelanjutnya? suratSelanjutnya;
+  // SuratSelanjutnya? suratSelanjutnya;
 
   // bool? suratSebelumnya;
 
@@ -49,9 +51,9 @@ class SuratDetailModel {
         // status: json["status"],
         ayat: json["ayat"] == null ? [] : List<Ayat>.from(
             json["ayat"]!.map((x) => Ayat.fromJson(x))),
-        suratSelanjutnya: json["surat_selanjutnya"] == null
-            ? null
-            : SuratSelanjutnya.fromJson(json["surat_selanjutnya"]),
+        // suratSelanjutnya: json["surat_selanjutnya"] == null
+        //     ? null
+        //     : SuratSelanjutnya.fromJson(json["surat_selanjutnya"]),
         // suratSebelumnya: json["surat_sebelumnya"],
       );
 
@@ -68,7 +70,7 @@ class SuratDetailModel {
         // "status": status,
         "ayat": ayat == null ? [] : List<dynamic>.from(
             ayat!.map((x) => x.toJson())),
-        "surat_selanjutnya": suratSelanjutnya?.toJson(),
+        // "surat_selanjutnya": suratSelanjutnya?.toJson(),
         // "surat_sebelumnya": suratSebelumnya,
       };
 
@@ -84,52 +86,11 @@ class SuratDetailModel {
       "audio": audio,
       // "status": status,
       "ayat": ayat == null ? [] : List<dynamic>.from(ayat!.map((x) => x.toJson())),
-      "surat_selanjutnya": suratSelanjutnya?.toJson(),
+      // "surat_selanjutnya": suratSelanjutnya?.toJson(),
     };
   }
 }
 
-class Ayat {
-  Ayat({
-    this.id,
-    this.surah,
-    this.nomor,
-    this.ar,
-    this.tr,
-    this.idn,
-  });
-
-  int? id;
-  int? surah;
-  int? nomor;
-  String? ar;
-  String? tr;
-  String? idn;
-
-  factory Ayat.fromRawJson(String str) => Ayat.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory Ayat.fromJson(Map<String, dynamic> json) =>
-      Ayat(
-        id: json["id"],
-        surah: json["surah"],
-        nomor: json["nomor"],
-        ar: json["ar"],
-        tr: json["tr"],
-        idn: json["idn"],
-      );
-
-  Map<String, dynamic> toJson() =>
-      {
-        "id": id,
-        "surah": surah,
-        "nomor": nomor,
-        "ar": ar,
-        "tr": tr,
-        "idn": idn,
-      };
-}
 
 class SuratSelanjutnya {
   SuratSelanjutnya({

@@ -2,11 +2,12 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../surah_detail/domain/model/ayat.dart';
 import '../../surah_detail/domain/model/surat_detail_model.dart';
 
 class DataAyatLocal {
 
-  static List<SuratDetailModel> listDataSavedAyatLocal = [];
+  static List<Ayat> listDataSavedAyatLocal = [];
 
   static const savedAyatKey = 'savedAyatKey';
 
@@ -17,10 +18,17 @@ class DataAyatLocal {
     return jsonDecode(result);
   }
 
+  static removeSavedAyat()async{
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.remove(savedAyatKey);
+  }
+
   static void setSavedAyat(SuratDetailModel suratDetailModel) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(savedAyatKey, jsonEncode(suratDetailModel.toMap()));
   }
+
+
 }
 
 class SavedAyatLocal {

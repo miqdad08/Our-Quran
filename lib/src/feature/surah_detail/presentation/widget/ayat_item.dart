@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myquran/src/const/app_color.dart';
-import 'package:myquran/src/feature/surah_detail/domain/model/surat_detail_model.dart';
+
+import '../../domain/model/ayat.dart';
 
 class AyatItem extends StatelessWidget {
-  final SuratDetailModel detail;
-  final int index;
-  const AyatItem({Key? key, required this.detail, required this.index}) : super(key: key);
+  final Ayat ayat;
+  final bool isSaved;
+  final VoidCallback? ontap;
+
+  const AyatItem({
+    Key? key,
+    required this.ayat,
+    this.ontap,
+    required this.isSaved,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var ayat = detail.ayat![index];
     return Padding(
       padding: const EdgeInsets.only(top: 24),
       child: Column(
@@ -50,9 +57,12 @@ class AyatItem extends StatelessWidget {
                 const SizedBox(
                   width: 16,
                 ),
-                const Icon(
-                  Icons.bookmark_outline,
-                  color: Colors.white,
+                IconButton(
+                  onPressed: ontap,
+                  icon: Icon(
+                    isSaved ? Icons.bookmark : Icons.bookmark_outline,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),
