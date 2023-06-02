@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myquran/src/feature/surah_detail/presentation/widget/search_ayat_box.dart';
+import 'package:myquran/src/common/search_ayat_box.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import '../../../../const/app_color.dart';
+import '../const/app_color.dart';
 
 class AppBarDetailWidget extends StatelessWidget
     implements PreferredSizeWidget {

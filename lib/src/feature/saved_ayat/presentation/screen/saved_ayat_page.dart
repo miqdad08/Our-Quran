@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:myquran/src/common/saved_ayat_widget.dart';
 import 'package:myquran/src/feature/saved_ayat/presentation/saved_ayat_bloc/saved_ayat_bloc.dart';
 import '../../../../const/app_color.dart';
 import '../../../home/presentation/widget/app_bar_home.dart';
-import '../../../surah_detail/presentation/widget/ayat_item.dart';
 
 class SavedAyatPage extends StatefulWidget {
   const SavedAyatPage({Key? key}) : super(key: key);
@@ -32,7 +32,7 @@ class _SavedAyatPageState extends State<SavedAyatPage> {
             return const Center(child: CircularProgressIndicator());
           }
           if (state is SavedAyatLoaded) {
-            var savedAyat = state.listSavedAyat;
+            var savedAyat = state.savedAyat;
             return savedAyat.isEmpty
                 ? const Center(
                     child: Text(
@@ -43,19 +43,24 @@ class _SavedAyatPageState extends State<SavedAyatPage> {
                       ),
                     ),
                   )
-                : ListView.builder(
+                : ListView.separated(
+                    separatorBuilder: (context, index) => Divider(
+                      color: const Color(0xFF7B80AD).withOpacity(.35),
+                    ),
                     shrinkWrap: true,
                     physics: const BouncingScrollPhysics(),
                     itemCount: savedAyat.length,
                     itemBuilder: (context, index) {
-                      return AyatItem(
-                        ontap: () {
+                      return SavedAyatWidget(
+                        onTap: () {
                           context.read<SavedAyatBloc>().add(
-                                RemoveSavedAyatEvent(ayat: savedAyat[index]),
+                                RemoveSavedAyatEvent(
+                                  id: savedAyat[index].id,
+                                ),
                               );
                         },
-                        ayat: savedAyat[index],
-                        isSaved: true,
+                        savedAyat: state.savedAyat[index],
+                        index: index,
                       );
                     },
                   );

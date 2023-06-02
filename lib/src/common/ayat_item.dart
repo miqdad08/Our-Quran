@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myquran/src/const/app_color.dart';
-
-import '../../domain/model/ayat.dart';
+import '../feature/surah_detail/domain/model/ayat.dart';
 
 class AyatItem extends StatelessWidget {
   final Ayat ayat;

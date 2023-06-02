@@ -13,14 +13,22 @@ class SavedAyatInitial extends SavedAyatState {}
 class SavedAyatLoading extends SavedAyatState {}
 
 class SavedAyatLoaded extends SavedAyatState {
-  final List<Ayat> listSavedAyat;
-  final bool isSaved;
+  final List<SavedAyat> savedAyat;
 
-  const SavedAyatLoaded({required this.isSaved,
-    required this.listSavedAyat,
+  const SavedAyatLoaded({
+    required this.savedAyat,
   });
 
   @override
   // TODO: implement props
-  List<Object> get props => [listSavedAyat, isSaved];
+  List<Object> get props => [savedAyat];
+}
+
+class SavedAyatError extends SavedAyatState {
+  final String message;
+
+  const SavedAyatError({required this.message});
+
+  @override
+  List<Object> get props => [message];
 }

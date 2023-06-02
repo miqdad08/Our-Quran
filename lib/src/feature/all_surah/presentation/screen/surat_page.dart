@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:myquran/src/feature/all_surah/presentation/widget/surah_item.dart';
+import 'package:myquran/src/common/surah_item.dart';
 import '../cubit/surat_cubit.dart';
 
 class SuratPage extends StatefulWidget {

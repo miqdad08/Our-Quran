@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:myquran/src/feature/all_surah/domain/model/surat_model.dart';
 import 'package:myquran/src/feature/surah_detail/presentation/screen/surah_detail.dart';
 
-import '../../../../const/app_color.dart';
+import '../const/app_color.dart';
 
 class SurahItem extends StatelessWidget {
   final SuratModel surah;

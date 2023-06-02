@@ -26,7 +26,7 @@ class AyatLoaded extends AyatState {
 class AyatError extends AyatState{
   final String message;
 
-  AyatError({required this.message});
+  const AyatError({required this.message});
 
   @override
   // TODO: implement props

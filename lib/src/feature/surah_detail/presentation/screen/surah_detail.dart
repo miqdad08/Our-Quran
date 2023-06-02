@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:myquran/src/feature/surah_detail/presentation/widget/appbar_detail_widget.dart';
-import 'package:myquran/src/feature/surah_detail/presentation/widget/ayat_item.dart';
-import 'package:myquran/src/feature/surah_detail/presentation/widget/detail_banner_widget.dart';
+import 'package:myquran/src/common/appbar_detail_widget.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import '../../../../common/ayat_item.dart';
+import '../../../../common/detail_banner_widget.dart';
 import '../../../../const/app_color.dart';
 import '../../../all_surah/domain/model/surat_model.dart';
 import '../../../saved_ayat/presentation/saved_ayat_bloc/saved_ayat_bloc.dart';
@@ -92,11 +92,13 @@ class _SurahDetailPageState extends State<SurahDetailPage> {
                           // id: index,
                           ontap: () {
                             context.read<SavedAyatBloc>().add(
-                              AddSavedAyatEvent(
-                                ayat: ayatSurat.ayat![index],
-                                isSaved: true,
-                              ),
-                            );
+                                  AddSavedAyatEvent(
+                                    ayat: ayatSurat.ayat![index],
+                                    surah: ayatSurat.namaLatin!,
+                                    indexAyat: index,
+                                    lastRead: false,
+                                  ),
+                                );
                           },
                           isSaved: false,
                         );

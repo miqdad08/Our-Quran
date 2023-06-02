@@ -6,7 +6,7 @@ class SearchAyatBox extends StatefulWidget {
   final ItemScrollController itemScrollController;
   VoidCallback onCancel;
 
-  SearchAyatBox(
+   SearchAyatBox(
       {Key? key,
       required this.controller,
       required this.onCancel, required this.itemScrollController})
