@@ -16,7 +16,9 @@ class AppScreen extends StatelessWidget {
       title: 'My Quran',
       theme: ThemeData(
         primarySwatch: Colors.brown,
+        // The Primary Color can be changed
         fontFamily: GoogleFonts.poppins().fontFamily,
+        // The font family is using GoogleFonts
       ),
       home: const BottomNavigationWidget(),
       routes: {
